@@ -1,0 +1,10 @@
+<md-toolbar>
+    <button md-button md-small onClick="addTab($event)"> <md-icon class="example-icon">create</md-icon></button>
+  <button md-button md-small onClick="addTab($event)"> <md-icon class="example-icon">save</md-icon> </button>
+</md-toolbar>
+
+<md-tab-group>
+  <md-tab *ngFor="let tab of tabs" label="tab.title">
+    {{tab.content}}
+</md-tab>
+</md-tab-group>
