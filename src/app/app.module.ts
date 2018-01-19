@@ -12,7 +12,14 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { InMemoryDataService } from './services/in-memory-data.service';
 import { SqlSnippetsComponent } from './sql-snippets/sql-snippets.component';
 import { TabsComponent } from './tabs/tabs.component';
-import { MaterialModule } from './material.module'
+import {
+  MatButtonModule, MatCardModule, MatCheckboxModule, MatDialogModule, MatIconModule, MatInputModule, MatListModule,
+  MatMenuModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatSlideToggleModule, MatTabsModule,
+  MatToolbarModule
+} from "@angular/material";
 
 @NgModule({
   declarations: [
@@ -27,7 +34,19 @@ import { MaterialModule } from './material.module'
     HttpModule,
     RoutingModule,
     InMemoryWebApiModule.forRoot(InMemoryDataService),
-    MaterialModule,
+    MatButtonModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatDialogModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatSlideToggleModule,
+    MatTabsModule,
+    MatToolbarModule,
     BrowserAnimationsModule
   ],
   providers: [],

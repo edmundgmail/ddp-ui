@@ -1,10 +1,10 @@
-<md-toolbar>
-    <button md-button md-small onClick="addTab($event)"> <md-icon class="example-icon">create</md-icon></button>
-  <button md-button md-small onClick="addTab($event)"> <md-icon class="example-icon">save</md-icon> </button>
-</md-toolbar>
+<mat-toolbar>
+    <button md-button md-small onClick="addTab($event)"> <mat-icon class="example-icon">create</mat-icon></button>
+  <button md-button md-small onClick="addTab($event)"> <mat-icon class="example-icon">save</mat-icon> </button>
+</mat-toolbar>
 
-<md-tab-group>
-  <md-tab *ngFor="let tab of tabs" label="tab.title">
+<mat-tab-group>
+  <mat-tab *ngFor="let tab of tabs" label="tab.title">
     {{tab.content}}
-</md-tab>
-</md-tab-group>
+</mat-tab>
+</mat-tab-group>
