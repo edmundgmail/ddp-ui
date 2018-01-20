@@ -15,7 +15,7 @@ export class TabsComponent implements OnInit {
   ngOnInit() {
   }
 
-  addTab() {
+  public addTab() {
     var tab = new Tab();
     tab.title = "hello";
     tab.content = "this is my tab";
