@@ -1,14 +1,41 @@
 .main-content {
-  padding: 8px;
+  padding: 4px;
 }
 
 .md-button.md-small {
-  width: 20px;
-  height: 20px;
-  line-height: 20px;
-  min-height: 20px;
+  width: 10px;
+  height: 10px;
+  line-height: 10px;
+  min-height: 10px;
   vertical-align: top;
   font-size: 10px;
   padding: 0 0;
   margin: 0;
 }
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+md-button {
+  height: 10px !important;
+}
+
+mat-toolbar {
+  height: 35px !important;
+  min-height: 35px !important;
+}
+
+.mat-icon-button {
+  line-height: 0;
+}
+
+example-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.example-container > * {
+  width: 100%;
+}
+
