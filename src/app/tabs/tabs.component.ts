@@ -11,7 +11,7 @@ import {__core_private_testing_placeholder__} from "@angular/core/testing";
 
 export class TabsComponent implements OnInit {
   @Input('type') type: string;
-  currentIndex: number = 0;
+  currentIndex: number = -1;
 
   tabs: Tab[] = [];
   placeHolder: string;
@@ -36,13 +36,24 @@ export class TabsComponent implements OnInit {
     this.tabs.push(tab)
   }
 
+  loadTab() {
+    var tab = new Tab();
+    tab.name = "New*";
+    tab.content = "this is my tab";
+    this.tabs.push(tab)
+  }
+
   saveTab() {
     const x : Tab = this.tabs[this.currentIndex];
     console.log("myScript=" + this.tabs[this.currentIndex].content);
   }
 
-  removeTab(tab: Tab){
-    this.tabs = this.tabs.filter(x=> x != tab)
+  closeTab(){
+    if(this.currentIndex>-1) this.tabs.splice(this.currentIndex, 1);
+  }
+
+  runTab(tab: Tab){
+
   }
 
   tabChanged (tabChangeEvent: MatTabChangeEvent)
@@ -50,9 +61,5 @@ export class TabsComponent implements OnInit {
     this.currentIndex = tabChangeEvent.index;
     console.log('tabChangeEvent => ', tabChangeEvent);
     console.log('index => ', tabChangeEvent.index);
-  }
-
-  trackByIndex(index, item){
-    return index;
   }
 }

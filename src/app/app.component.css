@@ -17,6 +17,10 @@
   flex: 1 1 auto;
 }
 
+.example-placeholder {
+  flex: 0 0 1%;
+}
+
 md-button {
   height: 10px !important;
 }
@@ -39,3 +43,6 @@ example-container {
   width: 100%;
 }
 
+mat-tabs-wrapper, mat-tabs-canvas, mat-pagination-wrapper {
+  height: 170px !important;
+}

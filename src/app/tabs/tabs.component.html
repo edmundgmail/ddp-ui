@@ -1,15 +1,18 @@
 <mat-toolbar>
-    <button md-button (click)="addTab()"> <mat-icon>create</mat-icon></button>
+  <button md-button (click)="addTab()"> <mat-icon>add</mat-icon></button>
+  <button md-button (click)="loadTab()"> <mat-icon>open_with</mat-icon></button>
   <button md-button (click)="saveTab()"> <mat-icon >save</mat-icon> </button>
+  <button md-button (click)="closeTab()"> <mat-icon >close</mat-icon> </button>
+  <div class="example-placeholder"></div>
+  <button md-button (click)="runTab()"> <mat-icon >play_arrow</mat-icon> </button>
 </mat-toolbar>
 
 <mat-tab-group #tabGroup (selectedTabChange)="tabChanged($event)">
   <mat-tab *ngFor="let tab of tabs; let i = index" label="{{tabs[i].name}}">
+    <mat-toolbar>
+    </mat-toolbar>
     <div class="example-container">
-    <!--mat-form-field-->
       <textarea matInput id="tabs{{i}}" [(ngModel)]="tabs[i].content" name="tabs[i].name" matTextareaAutosize matAutosizeMinRows="20"></textarea>
-      <!--input id="contents{{i}}" [(ngModel)]="contents[i]" type="text"/-->
-    <!--/mat-form-field-->
     </div>
   </mat-tab>
 </mat-tab-group>
