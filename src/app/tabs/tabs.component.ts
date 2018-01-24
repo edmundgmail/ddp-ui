@@ -2,6 +2,9 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Tab} from '../models/tab';
 import {MatTabChangeEvent} from "@angular/material";
 import {__core_private_testing_placeholder__} from "@angular/core/testing";
+import {FormControl, NgModel} from '@angular/forms';
+import {startWith} from 'rxjs/operators';
+import {map} from 'rxjs/operators/map';
 
 @Component({
   selector: 'app-tabs',
@@ -15,7 +18,15 @@ export class TabsComponent implements OnInit {
 
   tabs: Tab[] = [];
   placeHolder: string;
-  contents:any[] = [];
+
+  myControl: FormControl = new FormControl();
+
+  options = [
+    'One',
+    'Two',
+    'Three'
+  ];
+
 
   constructor() {
   }
@@ -31,7 +42,7 @@ export class TabsComponent implements OnInit {
 
   addTab() {
     var tab = new Tab();
-    tab.name = "New*";
+    tab.name = "New";
     tab.content = "this is my tab";
     this.tabs.push(tab)
   }

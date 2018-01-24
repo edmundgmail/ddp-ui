@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { RoutingModule } from './routing.module';
@@ -13,6 +13,7 @@ import { InMemoryDataService } from './services/in-memory-data.service';
 import { SqlSnippetsComponent } from './sql-snippets/sql-snippets.component';
 import { TabsComponent } from './tabs/tabs.component';
 import {
+  MatAutocompleteModule,
   MatButtonModule, MatCardModule, MatCheckboxModule, MatDialogModule, MatIconModule, MatInputModule, MatListModule,
   MatMenuModule,
   MatSelectModule,
@@ -47,6 +48,8 @@ import {
     MatSlideToggleModule,
     MatTabsModule,
     MatToolbarModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule
   ],
   providers: [],
