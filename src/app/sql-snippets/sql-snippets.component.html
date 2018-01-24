@@ -1,7 +1,7 @@
 <app-tabs type="sql"></app-tabs>
 
 <div *ngFor="let num of ['1','2','3']; let i=index">
-  <input id="qtd{{num}}" [(ngModel)]="qtd[num]" type="text"/>
+  <input id="qtd{{num}}" [(ngModel)]="qtd[i]" type="text"/>
 </div>
 
 {{ qtd | json}}

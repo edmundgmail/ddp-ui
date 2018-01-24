@@ -15,6 +15,7 @@ export class TabsComponent implements OnInit {
 
   tabs: Tab[] = [];
   placeHolder: string;
+  contents:any[] = [];
 
   constructor() {
   }
@@ -37,7 +38,7 @@ export class TabsComponent implements OnInit {
 
   saveTab() {
     const x : Tab = this.tabs[this.currentIndex];
-    console.log("myScript=" + x.content);
+    console.log("myScript=" + this.tabs[this.currentIndex].content);
   }
 
   removeTab(tab: Tab){

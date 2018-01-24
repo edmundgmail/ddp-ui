@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['../app.component.css']
 })
 export class SqlSnippetsComponent implements OnInit {
-  qtd:any[] = {};
+  qtd:any[] = [];
 
   constructor() { }
 
