@@ -21,6 +21,7 @@ import {
   MatSlideToggleModule, MatTabsModule,
   MatToolbarModule
 } from "@angular/material";
+import {CoreService} from './services/core.service';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,7 @@ import {
     ReactiveFormsModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [CoreService],
   bootstrap: [AppComponent],
   entryComponents: []
 })

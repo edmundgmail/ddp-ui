@@ -1,10 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Tab} from '../models/tab';
 import {MatTabChangeEvent} from "@angular/material";
-import {__core_private_testing_placeholder__} from "@angular/core/testing";
-import {FormControl, NgModel} from '@angular/forms';
+import {FormControl} from '@angular/forms';
 import {startWith} from 'rxjs/operators';
 import {map} from 'rxjs/operators/map';
+import {Observable} from 'rxjs/Observable';
+import {Http} from '@angular/http';
+import {CoreService} from '../services/core.service';
 
 @Component({
   selector: 'app-tabs',
@@ -21,14 +23,11 @@ export class TabsComponent implements OnInit {
 
   myControl: FormControl = new FormControl();
 
-  options = [
-    'One',
-    'Two',
-    'Three'
-  ];
+  protected options = ['a','b'];
 
+  filteredOptions: Observable<string[]>;
 
-  constructor() {
+  constructor(protected http: Http, protected coreService: CoreService) {
   }
 
   ngOnInit() {
@@ -38,6 +37,19 @@ export class TabsComponent implements OnInit {
     else if(this.type=='scala'){
       this.placeHolder = 'Please input scala code';
     }
+
+    //this.http.get(this.coreService.baseUrl +'sp').subscribe(res=> this.options = res.json() as string[]);
+
+    this.filteredOptions = this.myControl.valueChanges
+      .pipe(
+        startWith(''),
+        map(val => this.filter(val))
+      );
+  }
+
+  filter(val: string): string[] {
+    return this.options.filter(option =>
+      option.toLowerCase().indexOf(val.toLowerCase()) === 0);
   }
 
   addTab() {
