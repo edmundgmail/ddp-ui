@@ -22,6 +22,8 @@ import {
   MatToolbarModule
 } from "@angular/material";
 import {CoreService} from './services/core.service';
+import {WebSocketService} from './services/websocket.service';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,7 @@ import {CoreService} from './services/core.service';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule,
+    HttpClientModule,
     RoutingModule,
     InMemoryWebApiModule.forRoot(InMemoryDataService),
     MatButtonModule,
@@ -53,7 +55,7 @@ import {CoreService} from './services/core.service';
     ReactiveFormsModule,
     BrowserAnimationsModule
   ],
-  providers: [CoreService],
+  providers: [CoreService, WebSocketService],
   bootstrap: [AppComponent],
   entryComponents: []
 })

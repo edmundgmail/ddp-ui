@@ -15,7 +15,6 @@ import {CoreService} from '../services/core.service';
 })
 
 export class TabsComponent implements OnInit {
-  @Input('type') type: string;
   currentIndex: number = -1;
 
   tabs: Tab[] = [];
@@ -23,23 +22,15 @@ export class TabsComponent implements OnInit {
 
   myControl: FormControl = new FormControl();
 
-  protected options = ['a','b'];
+  protected options = [];
 
   filteredOptions: Observable<string[]>;
 
-  constructor(protected http: Http, protected coreService: CoreService) {
+  constructor() {
   }
 
   ngOnInit() {
-    if(this.type == 'sql'){
-      this.placeHolder = 'Please input SQL snippet';
-    }
-    else if(this.type=='scala'){
-      this.placeHolder = 'Please input scala code';
-    }
-
     //this.http.get(this.coreService.baseUrl +'sp').subscribe(res=> this.options = res.json() as string[]);
-
     this.filteredOptions = this.myControl.valueChanges
       .pipe(
         startWith(''),
