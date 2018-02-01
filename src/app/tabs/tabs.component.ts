@@ -49,8 +49,15 @@ export abstract class TabsComponent implements OnInit {
   }
 
   addTab(name: string) {
-    var tab = new Tab(name, this.placeHolder);
-    this.tabs.push(tab)
+    let i = this.tabs.map(t=>t.name).indexOf(name);
+    if(i == -1) {
+      var tab = new Tab(name, this.placeHolder);
+      this.tabs.push(tab)
+    }
+    else {
+      //todo: put the focus
+    }
+
   }
 
   abstract loadTab(name: string) : void

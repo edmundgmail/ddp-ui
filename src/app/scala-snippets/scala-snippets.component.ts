@@ -76,8 +76,15 @@ export class ScalaSnippetsComponent extends TabsComponent implements OnInit {
     this.http.get(this.scriptUrl+'/'+name).subscribe(res=> {
       console.log("res = " + res);
       const t = (res as Tab);
-      var tab = new Tab(t.name, t.content);
-      this.tabs.push(tab)
+
+      let i = this.tabs.map(t=>t.name).indexOf(t.name);
+      if(i == -1) {
+        var tab = new Tab(t.name, t.content);
+        this.tabs.push(tab)
+      }
+      else {
+        this.tabs[i].content = t.content;
+      }
     });
 
   }
