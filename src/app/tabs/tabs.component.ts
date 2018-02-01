@@ -8,13 +8,7 @@ import {Observable} from 'rxjs/Observable';
 import {Http} from '@angular/http';
 import {CoreService} from '../services/core.service';
 
-@Component({
-  selector: 'app-tabs',
-  templateUrl: './tabs.component.html',
-  styleUrls: ['../app.component.css']
-})
-
-export class TabsComponent implements OnInit {
+export abstract class TabsComponent implements OnInit {
   currentIndex: number = -1;
 
   tabs: Tab[] = [];
@@ -43,22 +37,25 @@ export class TabsComponent implements OnInit {
       option.toLowerCase().indexOf(val.toLowerCase()) === 0);
   }
 
-  addTab() {
-    var tab = new Tab("New*", this.placeHolder);
-    this.tabs.push(tab)
-  }
-
-  loadTab() {
-    var tab = new Tab("New*", this.placeHolder);
-    this.tabs.push(tab)
-  }
-
-  saveTab() {
-    if(this.currentIndex>-1){
-      const x : Tab = this.tabs[this.currentIndex];
-      console.log("myScript=" + this.tabs[this.currentIndex].content);
+  onKeyPress(ev) {
+    if(ev.key == 'Enter'){
+      if(this.options.indexOf(this.myControl.value) >= 0) {
+        this.loadTab(this.myControl.value);
+      }
+      else {
+        this.addTab(this.myControl.value);
+      }
     }
   }
+
+  addTab(name: string) {
+    var tab = new Tab(name, this.placeHolder);
+    this.tabs.push(tab)
+  }
+
+  abstract loadTab(name: string) : void
+
+  abstract saveTab() : void
 
   closeTab(){
     if(this.currentIndex>-1) {

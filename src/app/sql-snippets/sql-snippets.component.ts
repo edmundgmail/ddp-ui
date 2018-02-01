@@ -39,6 +39,14 @@ export class SqlSnippetsComponent extends TabsComponent implements OnInit {
   */
   }
 
+  saveTab() {
+
+  }
+
+  loadTab(name: string) {
+
+  }
+
   ngOnInit() {
     super.ngOnInit();
     this.placeHolder = "Please input SQL statement"

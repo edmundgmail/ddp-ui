@@ -31,8 +31,7 @@ import {ScalaSnippetsComponent} from "./scala-snippets/scala-snippets.component"
     AppComponent,
     DashboardComponent,
     SqlSnippetsComponent,
-    ScalaSnippetsComponent,
-    TabsComponent
+    ScalaSnippetsComponent
   ],
   imports: [
     BrowserModule,
