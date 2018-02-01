@@ -24,12 +24,14 @@ import {
 import {CoreService} from './services/core.service';
 import {WebSocketService} from './services/websocket.service';
 import {HttpClientModule} from '@angular/common/http';
+import {ScalaSnippetsComponent} from "./scala-snippets/scala-snippets.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     SqlSnippetsComponent,
+    ScalaSnippetsComponent,
     TabsComponent
   ],
   imports: [

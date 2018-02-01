@@ -8,7 +8,7 @@ import {Message} from '../models/message';
 import {HttpClient} from '@angular/common/http';
 import {ScriptSimple} from '../models/script-simple';
 
-const CHAT_URL = "ws://localhost:9000/ws";
+const CHAT_URL = "ws://localhost:5000/ws";
 
 @Component({
   selector: 'app-sql-snippets',
@@ -17,7 +17,6 @@ const CHAT_URL = "ws://localhost:9000/ws";
 })
 
 export class SqlSnippetsComponent extends TabsComponent implements OnInit {
-  protected options = [];
 
   constructor(protected http: HttpClient, protected coreService: CoreService, protected ws : WebSocketService) {
     super();
@@ -42,7 +41,8 @@ export class SqlSnippetsComponent extends TabsComponent implements OnInit {
 
   ngOnInit() {
     super.ngOnInit();
-    this.http.get(this.coreService.baseUrl +'sp').subscribe(res=> {
+    this.placeHolder = "Please input SQL statement"
+    this.http.get(this.coreService.baseUrl +'sp/sql/script').subscribe(res=> {
       console.log("res = " + res);
       this.options = (res as ScriptSimple[]).map(r=>r.name);
     });

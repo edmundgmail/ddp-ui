@@ -44,26 +44,28 @@ export class TabsComponent implements OnInit {
   }
 
   addTab() {
-    var tab = new Tab();
-    tab.name = "New";
-    tab.content = "this is my tab";
+    var tab = new Tab("New*", this.placeHolder);
     this.tabs.push(tab)
   }
 
   loadTab() {
-    var tab = new Tab();
-    tab.name = "New*";
-    tab.content = "this is my tab";
+    var tab = new Tab("New*", this.placeHolder);
     this.tabs.push(tab)
   }
 
   saveTab() {
-    const x : Tab = this.tabs[this.currentIndex];
-    console.log("myScript=" + this.tabs[this.currentIndex].content);
+    if(this.currentIndex>-1){
+      const x : Tab = this.tabs[this.currentIndex];
+      console.log("myScript=" + this.tabs[this.currentIndex].content);
+    }
   }
 
   closeTab(){
-    if(this.currentIndex>-1) this.tabs.splice(this.currentIndex, 1);
+    if(this.currentIndex>-1) {
+      this.tabs.splice(this.currentIndex, 1);
+      if(this.tabs.length == 0) this.currentIndex = -1;
+    }
+
   }
 
   runTab(tab: Tab){

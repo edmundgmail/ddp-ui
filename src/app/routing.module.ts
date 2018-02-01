@@ -3,11 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {SqlSnippetsComponent} from './sql-snippets/sql-snippets.component';
+import {ScalaSnippetsComponent} from "./scala-snippets/scala-snippets.component";
 
 const routes: Routes = [
   {
     path: '',
-    component: SqlSnippetsComponent
+    component: DashboardComponent
   },
   {
     path: 'dashboard',
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'sqlsnippets',
     component: SqlSnippetsComponent
+  },
+  {
+    path: 'scalasnippets',
+    component: ScalaSnippetsComponent
   }
 ];
 
