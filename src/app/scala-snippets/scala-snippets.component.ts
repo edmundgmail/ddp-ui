@@ -39,8 +39,6 @@ export class ScalaSnippetsComponent extends TabsComponent implements OnInit {
       const tab = this.tabs[this.currentIndex];
 
       const x:string = JSON.stringify(tab);
-      console.log("x=" + x);
-      console.log("tab=" + JSON.stringify(tab));
       const httpOptions = {
         headers: new HttpHeaders({
           'Content-Type':  'application/json',
@@ -49,12 +47,15 @@ export class ScalaSnippetsComponent extends TabsComponent implements OnInit {
       };
 
 
-      this.http.post(this.runUrl, x, httpOptions).subscribe(  res => {
-          console.log(res);
-        },
-        err => {
-          console.log("Error occured = " + JSON.stringify(err));
-        });
+      this.http.post(this.runUrl, x, httpOptions).subscribe(
+        res => this.updateResult(res)
+        err=> this.updateResult(err));
+    }
+  }
+
+  private updateResult(res) {
+    if(res !== undefined) {
+      this.tabs[this.currentIndex].result += JSON.stringify(res) + "\n";
     }
   }
 

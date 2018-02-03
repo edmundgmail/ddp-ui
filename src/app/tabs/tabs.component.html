@@ -25,5 +25,8 @@
     <div class="example-container">
       <textarea matInput id="tabs{{i}}" [(ngModel)]="tabs[i].content" name="tabs[i].name" matTextareaAutosize matAutosizeMinRows="20"></textarea>
     </div>
+    <div class="example-container">
+      <textarea matInput contenteditable="false" id="tabs_result{{i}}" [(ngModel)]="tabs[i].result" name="tabs_result{{i}}" matTextareaAutosize matAutosizeMinRows="20"></textarea>
+    </div>
   </mat-tab>
 </mat-tab-group>
