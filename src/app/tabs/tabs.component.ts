@@ -44,6 +44,7 @@ export abstract class TabsComponent implements OnInit {
       }
       else {
         this.addTab(this.myControl.value);
+        this.options.push(this.myControl.value);
       }
     }
   }

@@ -33,27 +33,14 @@ export class ScalaSnippetsComponent extends TabsComponent implements OnInit {
     });
   }
 
-  runTab(tab: Tab){
-    let body = JSON.stringify(tab);
-    console.log(body)
 
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    //let options = new RequestOptions();
-
-    //options.headers = headers;
-    return this.http.post(this.runUrl, body)
-      .subscribe(
-        data => {console.log("succeeded"); this.onResetForm(); this.httpresult='success';},
-        (err: Response) => {
-          this.httpresult = `Backend returned code ${err.status}, body was: ${err.text()}`
-        }
-      );
-
-  }
-
-  saveTab() {
+  runTab() {
     if(this.currentIndex>-1){
-      const x:string = JSON.stringify(this.tabs[this.currentIndex]);
+      const tab = this.tabs[this.currentIndex];
+
+      const x:string = JSON.stringify(tab);
+      console.log("x=" + x);
+      console.log("tab=" + JSON.stringify(tab));
       const httpOptions = {
         headers: new HttpHeaders({
           'Content-Type':  'application/json',
@@ -61,7 +48,31 @@ export class ScalaSnippetsComponent extends TabsComponent implements OnInit {
         })
       };
 
+
+      this.http.post(this.runUrl, x, httpOptions).subscribe(  res => {
+          console.log(res);
+        },
+        err => {
+          console.log("Error occured = " + JSON.stringify(err));
+        });
+    }
+  }
+
+  saveTab() {
+    if(this.currentIndex>-1){
+      const tab = this.tabs[this.currentIndex];
+
+      const x:string = JSON.stringify(tab);
       console.log("x=" + x);
+      console.log("tab=" + JSON.stringify(tab));
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type':  'application/json',
+          'Authorization': 'my-auth-token'
+        })
+      };
+
+
       this.http.post(this.scriptUrl, x, httpOptions).subscribe(  res => {
           console.log(res);
         },
