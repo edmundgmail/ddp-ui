@@ -42,7 +42,11 @@ export class ScalaSnippetsComponent extends TabsComponent implements OnInit {
       const httpOptions = {
         headers: new HttpHeaders({
           'Content-Type':  'application/json',
-          'Authorization': 'my-auth-token'
+          'Authorization': 'my-auth-token',
+          'Cache-Control': 'no-cache',
+          'Cache-control': 'no-store',
+          'Pragma': 'no-cache',
+          'Expires': '0'
         })
       };
 
@@ -55,7 +59,10 @@ export class ScalaSnippetsComponent extends TabsComponent implements OnInit {
 
   private updateResult(res) {
     if(res !== undefined) {
-      this.tabs[this.currentIndex].result += JSON.stringify(res) + "\n";
+      if(res.status===200)
+        this.tabs[this.currentIndex].result += JSON.stringify(res.error.text) + "\n";
+      else
+        this.tabs[this.currentIndex].result += JSON.stringify(res.error) + "\n";
     }
   }
 
