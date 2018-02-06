@@ -7,24 +7,36 @@ import {map} from 'rxjs/operators/map';
 import {Observable} from 'rxjs/Observable';
 import {Http} from '@angular/http';
 import {CoreService} from '../services/core.service';
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {ScriptSimple} from "../models/script-simple";
 
 export abstract class TabsComponent implements OnInit {
-  currentIndex: number = -1;
+  protected currentIndex: number = -1;
 
-  tabs: Tab[] = [];
-  placeHolder: string;
+  protected tabs: Tab[] = [];
+  protected placeHolder: string;
 
-  myControl: FormControl = new FormControl();
+  protected myControl: FormControl = new FormControl();
 
   protected options = [];
 
-  filteredOptions: Observable<string[]>;
+  protected filteredOptions: Observable<string[]>;
 
-  constructor() {
+  protected runUrl: string;
+  protected scriptUrl: string;
+
+  constructor(protected http: HttpClient, protected coreService: CoreService) {
   }
+
 
   ngOnInit() {
     //this.http.get(this.coreService.baseUrl +'sp').subscribe(res=> this.options = res.json() as string[]);
+    this.http.get(this.scriptUrl).subscribe(res=> {
+      console.log("res = " + res);
+      this.options = (res as ScriptSimple[]).map(r=>r.name);
+    });
+
+
     this.filteredOptions = this.myControl.valueChanges
       .pipe(
         startWith(''),
@@ -61,10 +73,6 @@ export abstract class TabsComponent implements OnInit {
 
   }
 
-  abstract loadTab(name: string) : void
-
-  abstract saveTab() : void
-
   closeTab(){
     if(this.currentIndex>-1) {
       this.tabs.splice(this.currentIndex, 1);
@@ -73,14 +81,84 @@ export abstract class TabsComponent implements OnInit {
 
   }
 
-  runTab(tab: Tab){
-
-  }
-
   tabChanged (tabChangeEvent: MatTabChangeEvent)
   {
     this.currentIndex = tabChangeEvent.index;
     console.log('tabChangeEvent => ', tabChangeEvent);
     console.log('index => ', tabChangeEvent.index);
+  }
+
+  runTab() {
+    if(this.currentIndex>-1){
+      const tab = this.tabs[this.currentIndex];
+
+      const x:string = JSON.stringify(tab);
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type':  'application/json',
+          'Authorization': 'my-auth-token',
+          'Cache-Control': 'no-cache',
+          'Cache-control': 'no-store',
+          'Pragma': 'no-cache',
+          'Expires': '0'
+        })
+      };
+
+
+      this.http.post(this.runUrl, x, httpOptions).subscribe(
+        res => this.updateResult(res),
+        err=> this.updateResult(err));
+    }
+  }
+
+  private updateResult(res) {
+    if(res !== undefined) {
+      if(res.status===200)
+        this.tabs[this.currentIndex].result += JSON.stringify(res.error.text) + "\n";
+      else
+        this.tabs[this.currentIndex].result += JSON.stringify(res.error) + "\n";
+    }
+  }
+
+  saveTab() {
+    if(this.currentIndex>-1){
+      const tab = this.tabs[this.currentIndex];
+
+      const x:string = JSON.stringify(tab);
+      console.log("x=" + x);
+      console.log("tab=" + JSON.stringify(tab));
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type':  'application/json',
+          'Authorization': 'my-auth-token'
+        })
+      };
+
+
+      this.http.post(this.scriptUrl, x, httpOptions).subscribe(  res => {
+          console.log(res);
+        },
+        err => {
+          console.log("Error occured");
+        });
+    }
+  }
+
+  loadTab(name:string) {
+    //todo
+    this.http.get(this.scriptUrl+'/'+name).subscribe(res=> {
+      console.log("res = " + res);
+      const t = (res as Tab);
+
+      let i = this.tabs.map(t=>t.name).indexOf(t.name);
+      if(i == -1) {
+        var tab = new Tab(t.name, t.content);
+        this.tabs.push(tab)
+      }
+      else {
+        this.tabs[i].content = t.content;
+      }
+    });
+
   }
 }

@@ -5,7 +5,7 @@ import {CoreService} from '../services/core.service';
 import {WebSocketService} from '../services/websocket.service';
 import {Subject} from 'rxjs/Subject';
 import {Message} from '../models/message';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {ScriptSimple} from '../models/script-simple';
 
 const CHAT_URL = "ws://localhost:5000/ws";
@@ -17,9 +17,9 @@ const CHAT_URL = "ws://localhost:5000/ws";
 })
 
 export class SqlSnippetsComponent extends TabsComponent implements OnInit {
-
-  constructor(protected http: HttpClient, protected coreService: CoreService, protected ws : WebSocketService) {
-    super();
+  constructor(protected http: HttpClient, protected coreService: CoreService) {
+    super(http,coreService);
+  }
 
     /*
     this.messages   = <Subject<Message>>this.ws
@@ -37,24 +37,11 @@ export class SqlSnippetsComponent extends TabsComponent implements OnInit {
      console.log(msg);
    });
   */
-  }
-
-  saveTab() {
-
-  }
-
-  loadTab(name: string) {
-
-  }
-
   ngOnInit() {
-    super.ngOnInit();
     this.placeHolder = "Please input SQL statement"
-    this.http.get(this.coreService.baseUrl +'sp/sql/script').subscribe(res=> {
-      console.log("res = " + res);
-      this.options = (res as ScriptSimple[]).map(r=>r.name);
-    });
-
+    this.scriptUrl = this.coreService.baseUrl + 'sp/sql/script';
+    this.runUrl = this.coreService.baseUrl + 'sp/sql/run';
+    super.ngOnInit();
   }
 
 }
