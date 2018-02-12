@@ -107,16 +107,19 @@ export abstract class TabsComponent implements OnInit {
 
       this.http.post(this.runUrl, x, httpOptions).subscribe(
         res => this.updateResult(res),
-        err=> this.updateResult(err));
+        err=> this.updateErrorResult(err));
     }
   }
 
   private updateResult(res) {
     if(res !== undefined) {
-      if(res.status===200)
-        this.tabs[this.currentIndex].result += JSON.stringify(res.error.text) + "\n";
-      else
-        this.tabs[this.currentIndex].result += JSON.stringify(res.error) + "\n";
+        this.tabs[this.currentIndex].result += JSON.stringify(res) + "\n";
+    }
+  }
+
+  private updateErrorResult(res) {
+    if(res !== undefined) {
+      this.tabs[this.currentIndex].result += JSON.stringify(res.error) + "\n";
     }
   }
 
