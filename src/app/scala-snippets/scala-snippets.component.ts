@@ -25,4 +25,28 @@ export class ScalaSnippetsComponent extends TabsComponent implements OnInit {
     super.ngOnInit();
 
   }
+
+  private parseScalaPackageName(s: string) : string {
+    var myRegexp = /(?:^|\s)package\s+(\w+)/g;
+
+  }
+
+  saveTab() {
+    if(this.currentIndex>-1){
+      const tab = this.tabs[this.currentIndex];
+      let name = this.parseScalaPackageName(tab.content);
+
+      const x:string = JSON.stringify(tab);
+
+      let httpOptions =this.coreService.httpOptions;
+
+      this.http.post(this.scriptUrl, x, httpOptions).subscribe(  res => {
+          console.log(res);
+        },
+        err => {
+          console.log("Error occured");
+        });
+    }
+  }
+
 }

@@ -93,17 +93,7 @@ export abstract class TabsComponent implements OnInit {
       const tab = this.tabs[this.currentIndex];
 
       const x:string = JSON.stringify(tab);
-      const httpOptions = {
-        headers: new HttpHeaders({
-          'Content-Type':  'application/json',
-          'Authorization': 'my-auth-token',
-          'Cache-Control': 'no-cache',
-          'Cache-control': 'no-store',
-          'Pragma': 'no-cache',
-          'Expires': '0'
-        })
-      };
-
+      let httpOptions = this.coreService.httpOptions;
 
       this.http.post(this.runUrl, x, httpOptions).subscribe(
         res => this.updateResult(res),
@@ -126,16 +116,9 @@ export abstract class TabsComponent implements OnInit {
   saveTab() {
     if(this.currentIndex>-1){
       const tab = this.tabs[this.currentIndex];
-
       const x:string = JSON.stringify(tab);
-      console.log("x=" + x);
-      console.log("tab=" + JSON.stringify(tab));
-      const httpOptions = {
-        headers: new HttpHeaders({
-          'Content-Type':  'application/json',
-          'Authorization': 'my-auth-token'
-        })
-      };
+
+      let httpOptions = this.coreService.httpOptions;
 
 
       this.http.post(this.scriptUrl, x, httpOptions).subscribe(  res => {
