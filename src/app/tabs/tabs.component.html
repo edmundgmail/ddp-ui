@@ -18,7 +18,7 @@
 
 </mat-toolbar>
 
-<mat-tab-group #tabGroup (selectedTabChange)="tabChanged($event)">
+<mat-tab-group #tabGroup (selectedTabChange)="tabChanged($event)" [selectedIndex]="currentIndex">
   <mat-tab *ngFor="let tab of tabs; let i = index" label="{{tabs[i].name}}">
     <mat-toolbar>
     </mat-toolbar>

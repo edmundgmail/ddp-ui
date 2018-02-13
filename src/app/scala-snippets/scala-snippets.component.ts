@@ -27,8 +27,13 @@ export class ScalaSnippetsComponent extends TabsComponent implements OnInit {
   }
 
   private parseScalaPackageName(s: string) : string {
-    var myRegexp = /(?:^|\s)package\s+(\w+)/g;
+    var packageRegexp =  /(?:^|\s)package +(.*?)(?:\s|$)/g;
+    var classNameRegex = /(?:^|\s)class +(.*?)( +)extends( +)SparkJobApi(?:\s|$)/g;
+    var packagename = packageRegexp.exec(s);
+    var classname = classNameRegex.exec(s);
 
+    if(packagename && classname)
+      return packagename[1] + '.' + classname[1];
   }
 
   saveTab() {
@@ -36,7 +41,24 @@ export class ScalaSnippetsComponent extends TabsComponent implements OnInit {
       const tab = this.tabs[this.currentIndex];
       let name = this.parseScalaPackageName(tab.content);
 
-      const x:string = JSON.stringify(tab);
+      var currentTab = tab;
+
+      if(tab.name !== name){
+        var currentTab = this.tabs.find(r=>r.name === name);
+        if(currentTab === undefined ){
+          currentTab = new Tab(name, tab.content);
+          this.tabs.push(currentTab);
+          this.options.push(name);
+          this.currentIndex = this.tabs.length - 1;
+          this.myControl.setValue(name);
+        }
+        else{
+          alert("There's an tab with name " + name);
+          return;
+        }
+      }
+
+      const x:string = JSON.stringify(currentTab);
 
       let httpOptions =this.coreService.httpOptions;
 
