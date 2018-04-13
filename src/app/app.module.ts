@@ -18,18 +18,22 @@ import {
   MatMenuModule,
   MatSelectModule,
   MatSidenavModule,
-  MatSlideToggleModule, MatTabsModule,
+  MatSlideToggleModule, MatTableModule, MatTabsModule,
   MatToolbarModule
-} from "@angular/material";
+} from '@angular/material';
 import {CoreService} from './services/core.service';
 import {WebSocketService} from './services/websocket.service';
 import {HttpClientModule} from '@angular/common/http';
 import {ScalaSnippetsComponent} from "./scala-snippets/scala-snippets.component";
+import {DiscoverComponent} from './discover/discover.component';
+import {TableBasicExample} from './table-basic/table-basic-example';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
+    DiscoverComponent,
+    TableBasicExample,
     SqlSnippetsComponent,
     ScalaSnippetsComponent
   ],
@@ -52,6 +56,7 @@ import {ScalaSnippetsComponent} from "./scala-snippets/scala-snippets.component"
     MatSlideToggleModule,
     MatTabsModule,
     MatToolbarModule,
+    MatTableModule,
     MatAutocompleteModule,
     ReactiveFormsModule,
     BrowserAnimationsModule
