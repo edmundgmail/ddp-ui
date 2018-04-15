@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog, MatTableDataSource} from '@angular/material';
 import {NewDataSourceDialogComponent} from './new-data-source-dialog/new-data-source-dialog.component';
+import {DataSourceInfo} from '../models/DataSourceInfo';
 
 @Component({
   selector: 'app-discover',
@@ -19,27 +20,16 @@ export class DiscoverComponent implements OnInit {
 
   openDialog(data:DataSourceInfo): void {
     let dialogRef = this.dialog.open(NewDataSourceDialogComponent, {
-      data: data
+      data: data==null? {'name': '', 'type' : ''} : data
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      //this.animal = result;
+      ELEMENT_DATA.push(result);
     });
   }
-
 }
 
-export class DataSourceInfo {
-  public static JDBC : number = 1;
-  public static HIVE : number = 2;
-  public static LOCALFILE : number = 3;
 
-  name: string;
-  type: number;
-}
-
-const ELEMENT_DATA: DataSourceInfo[] = [
-  {"name" : "oracle-jdbc-connect", "type": DataSourceInfo.JDBC}
-];
+const ELEMENT_DATA: DataSourceInfo[] = [];
 

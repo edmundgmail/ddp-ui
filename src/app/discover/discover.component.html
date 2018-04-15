@@ -25,7 +25,7 @@
     <!-- Type Column -->
     <ng-container matColumnDef="type">
       <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.type}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{getDataSourceNameByType(element.type)}} </mat-cell>
     </ng-container>
 
     <!-- Actions Column -->
