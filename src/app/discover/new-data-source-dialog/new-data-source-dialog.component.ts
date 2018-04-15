@@ -13,7 +13,7 @@ export class NewDataSourceDialogComponent {
   newDataSourceGroup: FormGroup;
   types = DataSourceInfo.types;
 
-  dataSourceType = 0;
+  dataSourceType = '';
 
   constructor(
     public dialogRef: MatDialogRef<NewDataSourceDialogComponent>,
@@ -47,10 +47,6 @@ export class NewDataSourceDialogComponent {
       this.newDataSourceGroup.get('dataSourceTypeJDBCPasswordCtrl').setValue(data.jdbc.pass);
       this.newDataSourceGroup.get('dataSourceTypeJDBCSQLCtrl').setValue(data.jdbc.sql);
     }
-  }
-
-  getDataSourceNameByType(id: number) : string {
-    return DataSourceInfo.getDataSourceNameByType(id);
   }
 
   onChanges(): void {

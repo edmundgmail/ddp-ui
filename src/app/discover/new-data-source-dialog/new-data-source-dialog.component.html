@@ -6,8 +6,8 @@
 
     <mat-form-field class="example-full-width">
       <mat-select placeholder="Data Source Type" formControlName="dataSourceTypeCtrl">
-        <mat-option *ngFor="let type of types" [value]="type.id" >
-          {{ type.name }}
+        <mat-option *ngFor="let type of types" [value]="type" >
+          {{ type }}
         </mat-option>
       </mat-select>
     </mat-form-field>
