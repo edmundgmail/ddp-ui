@@ -26,12 +26,14 @@ import {WebSocketService} from './services/websocket.service';
 import {HttpClientModule} from '@angular/common/http';
 import {ScalaSnippetsComponent} from './scala-snippets/scala-snippets.component';
 import {DiscoverComponent} from './discover/discover.component';
+import {NewDataSourceDialogComponent} from './discover/new-data-source-dialog/new-data-source-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     DiscoverComponent,
+    NewDataSourceDialogComponent,
     SqlSnippetsComponent,
     ScalaSnippetsComponent
   ],
@@ -61,6 +63,6 @@ import {DiscoverComponent} from './discover/discover.component';
   ],
   providers: [CoreService, WebSocketService],
   bootstrap: [AppComponent],
-  entryComponents: []
+  entryComponents: [NewDataSourceDialogComponent]
 })
 export class AppModule { }

@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>Install Angular</h2>
+<mat-dialog-content>
+  <form class="example-container" [formGroup]="newDataSourceGroup" (submit)="onFormSubmit()" >
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Data Source Name" formControlName="dataSourceNameCtrl" >
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-select placeholder="Data Source Type" formControlName="dataSourceTypeCtrl">
+        <mat-option *ngFor="let type of types" [value]="type.id" >
+          {{ type.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div *ngIf="dataSourceType===1">
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="URL" formControlName="dataSourceTypeJDBCUrlCtrl" >
+    </mat-form-field>
+    </div>
+  </form>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button (click)="testConnection()">Test Connection</button>
+  <button mat-button [mat-dialog-close]="true" type="submit">Ok</button>
+</mat-dialog-actions>
