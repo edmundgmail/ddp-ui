@@ -34,12 +34,12 @@ export class NewDataSourceDialogComponent {
     this.loadData(data);
   }
 
-  loadData(data: DataSourceInfo) : void
+  loadData(data: DataSourceInfo): void
   {
     this.newDataSourceGroup.get('dataSourceNameCtrl').setValue(data.name);
     this.newDataSourceGroup.get('dataSourceTypeCtrl').setValue(data.type);
 
-    if(data.type == DataSourceInfo.JDBC){
+    if(data.type === DataSourceInfo.JDBC) {
       this.newDataSourceGroup.get('dataSourceTypeJDBCUrlCtrl').setValue(data.jdbc.url);
       this.newDataSourceGroup.get('dataSourceTypeJDBCUserNameCtrl').setValue(data.jdbc.user);
       this.newDataSourceGroup.get('dataSourceTypeJDBCPasswordCtrl').setValue(data.jdbc.pass);
@@ -53,16 +53,16 @@ export class NewDataSourceDialogComponent {
     });
   }
 
-  isJDBC() : boolean {
-    return this.dataSourceType==DataSourceInfo.JDBC;
+  isJDBC(): boolean {
+    return this.dataSourceType===DataSourceInfo.JDBC;
   }
 
 
-  updateData() : void {
+  updateData(): void {
     this.data.name = this.newDataSourceGroup.get("dataSourceNameCtrl").value;
     this.data.type = this.newDataSourceGroup.get("dataSourceTypeCtrl").value;
 
-    if(this.data.type == DataSourceInfo.JDBC) {
+    if(this.data.type === DataSourceInfo.JDBC) {
       this.data.jdbc.url = this.newDataSourceGroup.get("dataSourceTypeJDBCUrlCtrl").value;
       this.data.jdbc.user = this.newDataSourceGroup.get("dataSourceTypeJDBCUserNameCtrl").value;
       this.data.jdbc.pass = this.newDataSourceGroup.get("dataSourceTypeJDBCPasswordCtrl").value;
@@ -80,7 +80,7 @@ export class NewDataSourceDialogComponent {
     this.dialogRef.close();
   }
 
-  testConnection() : void {
+  testConnection(): void {
     this.updateData();
 
     if(this.dataSourceType == DataSourceInfo.JDBC) {
