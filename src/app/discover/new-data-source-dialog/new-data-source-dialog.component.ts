@@ -25,7 +25,6 @@ export class NewDataSourceDialogComponent {
       dataSourceNameCtrl: this.fb.control(null),
       dataSourceTypeCtrl: this.fb.control(null),
       dataSourceTypeJDBCUrlCtrl: this.fb.control(null),
-      dataSourceTypeJDBCDatabaseNameCtrl: this.fb.control(null),
       dataSourceTypeJDBCUserNameCtrl: this.fb.control(null),
       dataSourceTypeJDBCPasswordCtrl: this.fb.control(null),
       dataSourceTypeJDBCSQLCtrl: this.fb.control(null),
@@ -42,7 +41,6 @@ export class NewDataSourceDialogComponent {
 
     if(data.type == DataSourceInfo.JDBC){
       this.newDataSourceGroup.get('dataSourceTypeJDBCUrlCtrl').setValue(data.jdbc.url);
-      this.newDataSourceGroup.get('dataSourceTypeJDBCDatabaseNameCtrl').setValue(data.jdbc.database);
       this.newDataSourceGroup.get('dataSourceTypeJDBCUserNameCtrl').setValue(data.jdbc.user);
       this.newDataSourceGroup.get('dataSourceTypeJDBCPasswordCtrl').setValue(data.jdbc.pass);
       this.newDataSourceGroup.get('dataSourceTypeJDBCSQLCtrl').setValue(data.jdbc.sql);
@@ -55,13 +53,17 @@ export class NewDataSourceDialogComponent {
     });
   }
 
+  isJDBC() : boolean {
+    return this.dataSourceType==DataSourceInfo.JDBC;
+  }
+
+
   updateData() : void {
     this.data.name = this.newDataSourceGroup.get("dataSourceNameCtrl").value;
     this.data.type = this.newDataSourceGroup.get("dataSourceTypeCtrl").value;
 
     if(this.data.type == DataSourceInfo.JDBC) {
       this.data.jdbc.url = this.newDataSourceGroup.get("dataSourceTypeJDBCUrlCtrl").value;
-      this.data.jdbc.database = this.newDataSourceGroup.get("dataSourceTypeJDBCDatabaseNameCtrl").value;
       this.data.jdbc.user = this.newDataSourceGroup.get("dataSourceTypeJDBCUserNameCtrl").value;
       this.data.jdbc.pass = this.newDataSourceGroup.get("dataSourceTypeJDBCPasswordCtrl").value;
       this.data.jdbc.sql = this.newDataSourceGroup.get("dataSourceTypeJDBCSQLCtrl").value;

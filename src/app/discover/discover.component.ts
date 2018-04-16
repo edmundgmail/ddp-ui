@@ -12,52 +12,28 @@ import {Observable} from 'rxjs/Observable';
   styleUrls: ['../app.component.css']
 })
 export class DiscoverComponent implements OnInit {
-  displayedColumns = ['name', 'type', 'actions'];
-  dataSource = new MatTableDataSource<DataSourceInfo>(ELEMENT_DATA);
-
+  displayedColumns = ['name', 'type', 'description', 'actions'];
+  dataSource: MatTableDataSource<DataSourceInfo>;
 
   constructor(public dialog: MatDialog) { }
 
   ngOnInit() {
+    this.dataSource = new MatTableDataSource<DataSourceInfo>();
   }
 
   openDialog(data:DataSourceInfo): void {
     let dialogRef = this.dialog.open(NewDataSourceDialogComponent, {
-      data: data==null? {'name': '', 'type' : ''} : data
+      data: data==null? new DataSourceInfo() : data
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      const data = this.dataSource.data;
-      data.push(result);
-      this.dataSource.data = data;
+      if(result) {
+        const data = this.dataSource.data;
+        data.push(result);
+        this.dataSource.data = data;
+      }
     });
-  }
-}
-
-const ELEMENT_DATA : DataSourceInfo[] = [
-  {"name": "s1", "type" : "JDBC", "description" : "this is jdbc", jdbc: null}
-];
-
-
-class ExampleDatabase {
-  /** Stream that emits whenever the data has been modified. */
-  dataChange: BehaviorSubject<DataSourceInfo[]> = new BehaviorSubject<DataSourceInfo[]>([]);
-  get data(): DataSourceInfo[] { return this.dataChange.value; }
-
-  constructor() {
-  }
-
-  removeElement(e: number[]) {
-    //const copiedData = this.data.filter( d=>e.indexOf(d.position) < 0).slice();
-    //this.dataChange.next(copiedData);
-  }
-
-  /** Adds a new user to the database. */
-  addElement(e: DataSourceInfo) {
-    const copiedData = this.data.slice();
-    copiedData.push() ; //TODO : add code
-    this.dataChange.next(copiedData);
   }
 }
 

@@ -12,13 +12,10 @@
       </mat-select>
     </mat-form-field>
 
-    <div *ngIf="dataSourceType===1">
+    <div *ngIf="isJDBC()">
     <mat-form-field class="example-full-width">
         <input matInput placeholder="URL" formControlName="dataSourceTypeJDBCUrlCtrl" />
     </mat-form-field>
-      <mat-form-field class="example-full-width">
-        <input matInput placeholder="Database Name" formControlName="dataSourceTypeJDBCDatabaseNameCtrl" />
-      </mat-form-field>
       <mat-form-field class="example-full-width">
         <input matInput placeholder="User Name" formControlName="dataSourceTypeJDBCUserNameCtrl" />
       </mat-form-field>
@@ -38,7 +35,7 @@
 
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button >Cancel</button>
+  <button mat-button [mat-dialog-close]="false"  >Cancel</button>
   <button mat-button (click)="testConnection()">Test Connection</button>
   <button mat-button [mat-dialog-close]="data" (click)="onFormSubmit()">Ok</button>
 </mat-dialog-actions>

@@ -12,14 +12,12 @@ export class DataSourceInfo {
   name: string;
   type: string;
   description: string;
-
   jdbc: JDBCConnection;
 }
 
 
 export interface JDBCConnection {
   url: string;
-  database: string;
   user: string;
   pass: string;
   sql: string;
